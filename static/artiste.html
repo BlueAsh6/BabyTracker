@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/styles.css" />
+        <title>{{.Name}} - BabyTrack</title>
+    </head>
+    <body>
+        <div class="header_accueil">
+            <img src="/css/logoff.png" alt="Logo_babytrack" class="logo_header">
+            <div class="cadre_header_accueil">
+                <p class="txt_header_accueil">BabyTrack</p>
+            </div>
+            <button class="btn_retour" onclick="window.location.href='/'">
+                <p>← Retour</p>
+            </button>
+        </div>
+        <div class="bandeau_accueil">
+            <div class="option" onclick="window.location.href='/'">
+                <p class="txt_option">Accueil</p>
+            </div>
+            <div class="option" onclick="window.location.href='/'">
+                <p class="txt_option">Artistes</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="bandeau_left">
+                <div class="cadre_photo_artiste" style="background-image: url('{{.Image}}');">
+                </div>
+                <h2>{{.Name}}</h2>
+                <p>Créé en <strong>{{.CreationDate}}</strong></p>
+                <p>Premier album: <strong>{{.FirstAlbum}}</strong></p>
+                <p class="titre_membres"><strong>Membres ({{len .Members}})</strong></p>
+                {{range .Members}}
+                    <p class="item_membres">• {{.}}</p>
+                {{end}}
+            </div>
+            <div class="cadre_concerts_details">
+                <h3 class="titre_concerts">Concerts & Tournées</h3>
+                <div class="concerts_container" id="concerts-container">
+                    {{range .Concerts}}
+                    <div>
+                        <p>{{.Location}}</p>
+                        <p>{{.Date}}</p>
+                    </div>
+                    {{else}}
+                    <p class="grid_message grid_message--compact">Aucun concert disponible</p>
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

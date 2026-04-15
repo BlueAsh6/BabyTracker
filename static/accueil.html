@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/styles.css" />
+        <title>BabyTrack - Accueil</title>
+    </head>
+    <body>
+        <div class="header_accueil">
+            <img src="/css/logoff.png" alt="Logo_babytrack" class="logo_header">
+            <div class="cadre_header_accueil">
+                <p class="txt_header_accueil">BabyTrack</p>
+            </div>
+            <form action="/api/search" method="GET" class="search_form">
+                <input type="text" name="q" class="navbar_test" placeholder="Rechercher un artiste..." autocomplete="off">
+            </form>
+        </div>
+        <div class="bandeau_accueil">
+            <div class="option" onclick="window.location.href='/'">
+                <p class="txt_option">Accueil</p>
+            </div>
+            <div class="option" onclick="window.location.href='/'">
+                <p class="txt_option">Tous les Artistes</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="cadre_stats_accueil">
+                <div class="stats_accueil">
+                    <p class="txt_stats_accueil">Artistes affichés</p>
+                    <h3 id="totalArtists" class="stats_valeur">{{len .Artists}}</h3>
+                </div>
+            </div>
+            <p class="txt_suggestions_accueil">Découvrez les artistes</p>
+            <form action="/api/filter" method="GET" class="taille_cadre_filtre">
+                <div class="cadre_filtres">
+                    <h4 class="titre_filtres">Filtres rapides</h4>
+                    
+                    <div class="dispo_filtres">
+                        <div>
+                            <label class="label_filtres">Année de création</label>
+                            <input type="number" name="creationDateMin" class="inputs_filtres" placeholder="Ex: 1990">
+                        </div>
+                        <div>
+                            <label class="label_filtres">Année 1er album</label>
+                            <input type="number" name="firstAlbumYear" class="inputs_filtres" placeholder="Ex: 1995">
+                        </div>
+                        <div>
+                            <label class="label_filtres">Nombre de membres</label>
+                            <div class="filtres_min_max">
+                                <input type="number" name="membersMin" class="inputs_filtres" placeholder="Min">
+                                <input type="number" name="membersMax" class="inputs_filtres" placeholder="Max">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="label_filtres">Ville de concert</label>
+                            <input type="text" name="location" class="inputs_filtres" placeholder="Ex: Paris, London...">
+                        </div>
+                    </div>
+                    <div class="boutons_filtres">
+                        <a href="/" class="bouton_reset">Réinitialiser</a>
+                        <button type="submit" class="bouton_appliquer">Appliquer</button>
+                    </div>
+                </div>
+            </form>
+            <div class="dispo_artistes_accueil" id="artistsGrid">
+                {{range .Artists}}
+                <div class="suggestions carte_artiste" style="background-image: url('{{.Image}}');" onclick="window.location.href='/artiste?id={{.ID}}'">
+                    <div class="txt_noms_suggestions">{{.Name}}</div>
+                </div>
+                {{else}}
+                <p class="message_pas_artistes">Aucun artiste disponible</p>
+                {{end}}
+            </div>
+        </div>
+    </body>
+</html>
